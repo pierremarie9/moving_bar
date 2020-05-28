@@ -1,0 +1,10 @@
+body{
+    background-color: black;
+}
+
+#bar{
+    background-color: white;
+    width: 60px;
+    height: 20px;
+
+}
