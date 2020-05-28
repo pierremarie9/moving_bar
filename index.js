@@ -1,6 +1,6 @@
 let bar = document.querySelector('#bar');
 let ball = document.querySelector('#ball');
-let moveBy = 10;
+var moveBy = 10;
 
 window.addEventListener('load', ()=>{
     bar.style.position = 'absolute';
@@ -38,10 +38,33 @@ window.addEventListener('keydown', (e)=>{
 
 
 function move(item){
+    var moveDown = true;
+    var moveUp = false;
     var id = setInterval(()=>{
-        if(parseInt(item.style.top)< window.innerHeight - 25){
-            item.style.top = parseInt(item.style.top) + moveBy + 'px';
-        }
+
+        if(moveDown == true){
+            if(parseInt(item.style.top)< window.innerHeight - 25){
+                item.style.top = parseInt(item.style.top) + moveBy + 'px';
+            }
+            else{
+                moveDown = false;
+                moveUp = true;
+            };
+
+        };
+
+        if(moveUp == true){
+            if(parseInt(item.style.top)> 0){
+                item.style.top = parseInt(item.style.top) - moveBy + 'px';
+            }
+            else{
+                moveUp = false;
+                moveDown = true;
+            };
+
+        };
+        
+ 
     }, 100);
 
 }
