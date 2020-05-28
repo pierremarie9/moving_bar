@@ -1,11 +1,15 @@
 let bar = document.querySelector('#bar');
+let ball = document.querySelector('#ball');
 let moveBy = 10;
 
 window.addEventListener('load', ()=>{
     bar.style.position = 'absolute';
+    ball.style.position = 'absolute';
     bar.style.left = window.innerWidth/2 - 30 + 'px';
     bar.style.top = 0;
-})
+    ball.style.left = window.innerWidth/2 - 10 + 'px';
+    ball.style.top = window.innerHeight/2 - 10 + 'px';
+});
 
 window.addEventListener('keydown', (e)=>{
     switch(e.key){
@@ -25,5 +29,19 @@ window.addEventListener('keydown', (e)=>{
         // case 'ArrowDown':
         //     bar.style.top = parseInt(bar.style.top) + moveBy +'px';
         //     break;
+        case ' ':
+            document.body.style.backgroundColor = 'red';
+            move(ball);
+            break;
     }
 });
+
+
+function move(item){
+    var id = setInterval(()=>{
+        if(parseInt(item.style.top)< window.innerHeight - 25){
+            item.style.top = parseInt(item.style.top) + moveBy + 'px';
+        }
+    }, 100);
+
+}
