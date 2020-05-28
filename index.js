@@ -1,9 +1,18 @@
 let bar = document.querySelector('#bar');
 let ball = document.querySelector('#ball');
 let score = document.querySelector('#points');
+let highscore = document.querySelector('#highpoints');
 var moveByBar = 10;
 var moveByBall = 5;
 var scoreValue = 0;
+
+if(localStorage.getItem('highscore')){
+    highscore.textContent = localStorage.getItem('highscore');
+}
+else{
+    var highscoreValue = 0;
+    localStorage.setItem('highscore', highscoreValue);
+}
 
 window.addEventListener('load', ()=>{
     bar.style.position = 'absolute';
@@ -32,11 +41,19 @@ window.addEventListener('keydown', (e)=>{
         // case 'ArrowDown':
         //     bar.style.top = parseInt(bar.style.top) + moveBy +'px';
         //     break;
+        // case ' ':
+        //     move(ball);
+        //     break;
+    }
+});
+
+window.addEventListener('keydown', (e)=>{
+    switch(e.key){
         case ' ':
             move(ball);
             break;
     }
-});
+}, {once:true});
 
 
 function move(item){
@@ -70,7 +87,7 @@ function move(item){
                 moveSide = -moveSide;
             }
         }
-        else if(moveUp == true && parseInt(item.style.left ) >= parseInt(bar.style.left) && parseInt(item.style.left) <= parseInt(bar.style.left) + 40){
+        else if(moveUp == true && parseInt(item.style.left ) >= parseInt(bar.style.left) - 10 && parseInt(item.style.left) <= parseInt(bar.style.left) + 50){
                 moveUp = false;
                 moveDown = true;
                 scoreValue ++;
@@ -82,6 +99,11 @@ function move(item){
             lose.textContent = "You lost loser !";
             lose.classList.add('lost');
             document.body.append(lose);
+            if(scoreValue > localStorage.getItem('highscore')){
+                highscoreValue = scoreValue;
+                localStorage.setItem('highscore', highscoreValue);
+                highscore.textContent = localStorage.getItem('highscore');
+            }
             clearInterval(id);
         };
         

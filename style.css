@@ -33,3 +33,12 @@ body{
     color: white;
     font-family: 'Chelsea Market', cursive;
 }
+
+.highscore{
+    position: absolute;
+    display: block;
+    width: auto;
+    color: white;
+    font-family: 'Chelsea Market', cursive;
+    top: 25px;
+}
