@@ -1,7 +1,9 @@
 let bar = document.querySelector('#bar');
 let ball = document.querySelector('#ball');
+let score = document.querySelector('#points');
 var moveByBar = 10;
-var moveByBall = 5
+var moveByBall = 5;
+var scoreValue = 0;
 
 window.addEventListener('load', ()=>{
     bar.style.position = 'absolute';
@@ -71,12 +73,14 @@ function move(item){
         else if(moveUp == true && parseInt(item.style.left ) >= parseInt(bar.style.left) && parseInt(item.style.left) <= parseInt(bar.style.left) + 40){
                 moveUp = false;
                 moveDown = true;
+                scoreValue ++;
+                score.textContent = scoreValue;
                 moveSide = generateStep();
         }
         else if(moveUp == true){
             let lose = document.createElement('div');
             lose.textContent = "You lost loser !";
-            lose.style.color = "white";
+            lose.classList.add('lost');
             document.body.append(lose);
             clearInterval(id);
         };
@@ -96,4 +100,4 @@ function generateStep(){
         return randomTwo*7;
     }
 
-}
+};
